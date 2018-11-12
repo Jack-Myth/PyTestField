@@ -21,7 +21,7 @@ def GenSession():
     s.cookies.set("login", Login)
     s.cookies.set("pass_hash", Pass_Hash)
     s.headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36",
-               "Accept": "text/html,application/xhtml+xml,application/xml; q=0.9,image/webp,*/*;q=0.8"}
+               "Accept": "text/html,application/xhtml+xml,application/xml; q=0.9,image/jpeg,*/*;q=0.8"}
 
 def GetImg(Path):
     global imgCount
@@ -33,6 +33,7 @@ def GetImg(Path):
             ImgPageTree = etree.HTML(ImgPageResp.text)
             ImgAddressList = ImgPageTree.xpath('//div[@id="stats"]/ul/li[contains(text(),"Original")]/a/@href')
             ImgAddress=ImgAddressList[0]
+            break;
         except Exception:
             print("\t\t<i>Exception Detected,Sleep for a while.")
             time.sleep(30)
@@ -118,8 +119,7 @@ if StartPageNum != "":
     BeginURL += "&page=" + StartPageNum
 if inputStartURL != "":
     BeginURL = inputStartURL
-s.cookies.set("login", Login)
-s.cookies.set("pass_hash", Pass_Hash)
+GenSession()
 PageNumber = 1
 signal.signal(signal.SIGINT, Exiting)
 signal.signal(signal.SIGTERM, Exiting)

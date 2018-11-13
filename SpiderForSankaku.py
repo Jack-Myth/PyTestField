@@ -32,6 +32,9 @@ def GetImg(Path):
             ImgPageResp = s.get(str(Path))
             ImgPageTree = etree.HTML(ImgPageResp.text)
             ImgAddressList = ImgPageTree.xpath('//div[@id="stats"]/ul/li[contains(text(),"Original")]/a/@href')
+            if len(ImgAddressList)==0:
+                '''Maybe It's not a image(but a Flash or something)'''
+                ImgAddressList=ImgPageTree.xpath('//div[@id="non-image-content"]/p/a/@href')
             ImgAddress=ImgAddressList[0]
             break;
         except Exception:
@@ -120,7 +123,7 @@ if StartPageNum != "":
 if inputStartURL != "":
     BeginURL = inputStartURL
 GenSession()
-PageNumber = 1
+PageNumber = 0
 signal.signal(signal.SIGINT, Exiting)
 signal.signal(signal.SIGTERM, Exiting)
 print("Downloading Page" + str(PageNumber) + "...")

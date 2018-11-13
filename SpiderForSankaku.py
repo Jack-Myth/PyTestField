@@ -27,6 +27,7 @@ def GetImg(Path):
     global imgCount
     global TargetTag
     global s
+    SleepTime=30
     while True:
         try:
             ImgPageResp = s.get(str(Path))
@@ -39,7 +40,8 @@ def GetImg(Path):
             break;
         except Exception:
             print("\t\t<i>Exception Detected,Sleep for a while.")
-            time.sleep(30)
+            time.sleep(SleepTime)
+            SleepTime+=20
             GenSession()
     FileName = os.path.basename("https:" + str(ImgAddress))
     FileName = FileName.split("?")[0]

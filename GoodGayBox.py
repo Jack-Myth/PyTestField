@@ -10,6 +10,7 @@ import random
 
 import requests
 
+tttttimes=int(input("How many Like you want to get?"))
 seed = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 s=requests.session()
 s.headers=\
@@ -24,7 +25,7 @@ s.headers=\
     }
 sa1 = []
 sa2 = []
-for i in range(10):
+for i in range(tttttimes):
     sa1.clear()
     sa2.clear()
     for i in range(8):
